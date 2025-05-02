@@ -41,7 +41,7 @@ export function Main({ children, className, ...props }: MainProps) {
 				>
 					<h1 className="font-bold text-4xl">{title}</h1>
 				</motion.div>
-				<motion.div variants={variants} className="xs:px-40">{children}</motion.div>
+				<motion.div variants={variants} className="lg:px-40">{children}</motion.div>
 			</motion.main>
 		</AnimatePresence>
 	);
