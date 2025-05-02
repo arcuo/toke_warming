@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const navPages = [
-	{ path: "/", name: "Self-taught artist" },
-	{ path: "/art", name: "Art" },
-	{ path: "/about", name: "About" },
-	{ path: "/contact", name: "Contact" },
+export const navPages: { path: string; title: string; h1: string }[] = [
+	{ path: "/", title: "Home", h1: "Toke Warming - Self-taught artist" },
+	{ path: "/about", title: "About", h1: "Who am I?" },
+	{ path: "/art", title: "Art", h1: "My artworks" },
+	{ path: "/contact", title: "Contact", h1: "Contact me" },
 ];
 
 const MotionLink = motion.create(Link);
@@ -49,14 +49,13 @@ export const Header = () => {
 				<motion.div
 					className="inline-block"
 					animate={pathname === "/" ? "hover" : "nohover"}
+					transition={{ duration: 0.2 }}
 					variants={{
 						nohover: {
-							x: -30,
-							opacity: 0,
+							filter: "hue-rotate(-90deg)",
 						},
 						hover: {
-							x: 0,
-							opacity: 1,
+							filter: "none",
 						},
 					}}
 				>
@@ -70,7 +69,7 @@ export const Header = () => {
 				exit="hidden"
 				transition={{ staggerChildren: 0.15 }}
 			>
-				<ul className="flex gap-10 place-self-start">
+				<ul className="flex place-self-start sm:gap-10">
 					{navPages.slice(1).map((it, i) => (
 						<motion.li
 							key={i}
@@ -105,7 +104,7 @@ export const Header = () => {
 								)}
 							</AnimatePresence>
 							<Link href={it.path} className="z-10">
-								{it.name}
+								{it.title}
 							</Link>
 						</motion.li>
 					))}

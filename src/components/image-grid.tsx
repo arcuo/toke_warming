@@ -2,8 +2,19 @@
 import { motion } from "motion/react";
 import { InView } from "./in-view";
 import Image from "next/image";
-import { Suspense, useState, type ComponentProps } from "react";
+import { useState, type ComponentProps, type PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "./ui/dialog";
+import { Button, ButtonLink } from "./ui/button";
 
 export function ImagesGrid({ images }: { images: string[] }) {
 	return (
@@ -24,7 +35,7 @@ export function ImagesGrid({ images }: { images: string[] }) {
 								}}
 							>
 								<AnimatedLoadingImage
-									priority={false}
+									priority={i < 4}
 									src={imgSrc}
 									alt={`index: ${i}`}
 									width={400}
@@ -54,14 +65,64 @@ function AnimatedLoadingImage({
 			animate={isLoaded ? "visible" : "hidden"}
 			className={cn("mb-4", className)}
 		>
-			<Image
-				{...props}
-				onLoad={(e) => {
-					setIsLoaded(true);
-					onLoad?.(e);
-				}}
-				className="size-full rounded-lg object-contain"
-			/>
+			<ImageDialog src={props.src}>
+				<Image
+					{...props}
+					onLoad={(e) => {
+						setIsLoaded(true);
+						onLoad?.(e);
+					}}
+					className="size-full rounded-lg object-contain"
+				/>
+			</ImageDialog>
 		</motion.div>
+	);
+}
+
+function ImageDialog({
+	src,
+	children: trigger,
+}: PropsWithChildren<{ src: Parameters<typeof Image>[0]["src"] }>) {
+	return (
+		<Dialog>
+			<DialogTrigger asChild className="cursor-pointer">
+				{trigger}
+			</DialogTrigger>
+			<DialogContent className="flex w-[min(fit-content,95vw)] flex-col gap-0 p-0 sm:max-h-[min(1200px,80vh)] [&>button:last-child]:top-3.5">
+				<DialogHeader className="contents space-y-0 text-left">
+					<DialogTitle className="border-b px-6 py-4 text-base">
+						<h3>Image title</h3>
+						<DialogDescription className="mt-2">
+							<p>
+								Image description ... Lorem ipsum dolor, sit amet consectetur
+								adipisicing elit. Eius, obcaecati laborum. Explicabo culpa non
+								optio! Unde, laboriosam est nisi inventore maiores facere in.
+								Laborum vel corporis excepturi quia veniam ad!
+							</p>
+						</DialogDescription>
+					</DialogTitle>
+					<div className="overflow-y-auto">
+						<div className="px-6 py-4">
+							<div className="space-y-4 [&_strong]:font-semibold [&_strong]:text-foreground">
+								<div className="flex justify-center space-y-1">
+									<Image
+										src={src}
+										alt="Toke Warming"
+										width={1200}
+										height={1200}
+										className=" rounded-md"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<DialogFooter className="border-t px-6 py-4 sm:items-center">
+						<ButtonLink href={"/contact"} variant={"outline"}>
+							Contact me for more information
+						</ButtonLink>
+					</DialogFooter>
+				</DialogHeader>
+			</DialogContent>
+		</Dialog>
 	);
 }

@@ -16,7 +16,7 @@ interface MainProps extends React.ComponentProps<typeof motion.main> {
 
 export function Main({ children, className, ...props }: MainProps) {
 	const pathname = usePathname();
-	const title = navPages.find((it) => it.path === pathname)?.name;
+	const title = navPages.find((it) => it.path === pathname)?.h1;
 	return (
 		<AnimatePresence>
 			<motion.main
@@ -41,7 +41,7 @@ export function Main({ children, className, ...props }: MainProps) {
 				>
 					<h1 className="font-bold text-4xl">{title}</h1>
 				</motion.div>
-				<motion.div variants={variants} className="px-40">{children}</motion.div>
+				<motion.div variants={variants} className="xs:px-40">{children}</motion.div>
 			</motion.main>
 		</AnimatePresence>
 	);

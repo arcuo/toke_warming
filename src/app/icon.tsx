@@ -14,7 +14,7 @@ export default function Icon() {
 		<div
 			style={{
 				fontSize: 18,
-				backgroundColor: "var(--background)",
+				backgroundColor: "white",
 				width: "100%",
 				height: "100%",
 				borderRadius: 10,
@@ -24,7 +24,7 @@ export default function Icon() {
 				color: "white",
 			}}
 		>
-			🍄
+			🔥
 		</div>,
 		// ImageResponse options
 		{
