@@ -1,6 +1,11 @@
 import { ButtonLink } from "@/components/ui/button";
-import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+import { InstagramIcon } from "lucide-react";
 import { DK } from "./dk";
+
+export const metadata = {
+	title: "Commission",
+	description: "Contact me me for commission work in linocut, painting or sculpture through Instagram",
+};
 
 export default function Contact() {
 	return (

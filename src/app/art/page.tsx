@@ -9,10 +9,17 @@ function randomSize() {
 	return Math.floor(Math.random() * 600) + 400;
 }
 
-export default function Home() {
+export const metadata = {
+	title: "Art pieces",
+	description: "A collection of my artworks in linocut, painting and sculpture",
+};
+
+export default function Art() {
 	return (
 		<div className="flex flex-col items-center justify-center gap-10">
-		<p>These are a few of my pieces <i>Click on them to see more!</i></p>
+			<p>
+				These are a few of my pieces <i>Click on them to see more!</i>
+			</p>
 			<ImagesGrid
 				images={Array(10)
 					.fill(0)
