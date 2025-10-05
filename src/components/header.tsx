@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 
 export const navPages: { path: string; title: string; h1: string }[] = [
 	{ path: "/", title: "Home", h1: "Toke Warming - Self-taught artist" },
-	{ path: "/about", title: "About", h1: "Who am I?" },
 	{ path: "/art", title: "Art", h1: "My artworks" },
 	{ path: "/contact", title: "Commission", h1: "I do commission work" },
 ];

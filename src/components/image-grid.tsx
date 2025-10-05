@@ -1,12 +1,12 @@
 "use client";
+
 import { motion } from "motion/react";
 import { InView } from "./in-view";
-import Image from "next/image";
+import { Image } from "@imagekit/next";
 import { useState, type ComponentProps, type PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 import {
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogFooter,
@@ -14,14 +14,15 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "./ui/dialog";
-import { Button, ButtonLink } from "./ui/button";
+import { ButtonLink } from "./ui/button";
+import type { ImageKitFile } from "@/app/api/pieces";
 
-export function ImagesGrid({ images }: { images: string[] }) {
+export function ImagesGrid({ images }: { images: ImageKitFile[] }) {
 	return (
 		<div className="w-full">
 			<div className="h-[1200px] items-end justify-center pb-12">
 				<div className="columns-2 gap-4 px-8 sm:columns-3">
-					{images.map((imgSrc, i) => {
+					{images.map((file, i) => {
 						return (
 							<InView
 								key={i}
@@ -35,11 +36,11 @@ export function ImagesGrid({ images }: { images: string[] }) {
 								}}
 							>
 								<AnimatedLoadingImage
-									priority={i < 4}
-									src={imgSrc}
-									alt={`index: ${i}`}
-									width={400}
-									height={400}
+									imageProps={{
+										className: "rounded-lg",
+										priority: i < 4,
+									}}
+									file={file}
 								/>
 							</InView>
 						);
@@ -51,10 +52,12 @@ export function ImagesGrid({ images }: { images: string[] }) {
 }
 
 function AnimatedLoadingImage({
-	onLoad,
-	className,
-	...props
-}: ComponentProps<typeof Image>) {
+	imageProps,
+	file,
+}: {
+	file: ImageKitFile;
+	imageProps: Partial<ComponentProps<typeof Image>>;
+}) {
 	const [isLoaded, setIsLoaded] = useState(false);
 	return (
 		<motion.div
@@ -63,16 +66,21 @@ function AnimatedLoadingImage({
 				visible: { opacity: 1, scale: 1, filter: "blur(0px)" },
 			}}
 			animate={isLoaded ? "visible" : "hidden"}
-			className={cn("mb-4", className)}
+			className={cn("mb-4", imageProps.className)}
 		>
-			<ImageDialog src={props.src}>
+			<ImageDialog file={file}>
 				<Image
-					{...props}
+					urlEndpoint="https://ik.imagekit.io/tokewarming/"
+					src={`/${file.filePath}`}
 					onLoad={(e) => {
 						setIsLoaded(true);
-						onLoad?.(e);
+						imageProps.onLoad?.(e);
 					}}
-					className="size-full rounded-lg object-contain"
+					alt={file.name}
+					className="h-auto rounded-lg object-contain"
+					width={file.width / 2}
+					height={file.height / 2}
+					{...imageProps}
 				/>
 			</ImageDialog>
 		</motion.div>
@@ -80,9 +88,9 @@ function AnimatedLoadingImage({
 }
 
 function ImageDialog({
-	src,
+	file,
 	children: trigger,
-}: PropsWithChildren<{ src: Parameters<typeof Image>[0]["src"] }>) {
+}: PropsWithChildren<{ file: ImageKitFile }>) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild className="cursor-pointer">
@@ -106,8 +114,10 @@ function ImageDialog({
 							<div className="space-y-4 [&_strong]:font-semibold [&_strong]:text-foreground">
 								<div className="flex justify-center space-y-1">
 									<Image
-										src={src}
+										urlEndpoint={"https://ik.imagekit.io/tokewarming/"}
+										src={`/${file.filePath}`}
 										alt="Toke Warming"
+										loading="lazy"
 										width={1200}
 										height={1200}
 										className=" rounded-md"

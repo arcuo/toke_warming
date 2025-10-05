@@ -2,7 +2,7 @@
 
 import { ButtonLink } from "@/components/ui/button";
 import { motion, type Variant } from "motion/react";
-import Image from "next/image";
+import { Image } from "@imagekit/next";
 
 const fromLeft: Variant = {
 	x: -50,
@@ -43,7 +43,14 @@ export function AboutPage() {
 		>
 			<MotionImage
 				variants={{ hidden: fromTop, visible }}
-				src="https://placehold.co/1200x400/png"
+				urlEndpoint="https://ik.imagekit.io/tokewarming/"
+				src="IMG_7149.webp"
+				transformation={[
+					{
+						width: 1200,
+						height: 400,
+					},
+				]}
 				width={1200}
 				height={400}
 				alt="Toke Warming"
