@@ -21,7 +21,7 @@ export function ImagesGrid({ images }: { images: ImageKitFile[] }) {
 	return (
 		<div className="w-full">
 			<div className="h-[1200px] items-end justify-center pb-12">
-				<div className="columns-2 gap-4 px-8 sm:columns-3">
+				<div className="columns-2 gap-4 px-8 pb-8 sm:columns-3">
 					{images.map((file, i) => {
 						return (
 							<InView

@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
 			new URL("https://ik.imagekit.io/tokewarming/**"),
 		],
 	},
+	
 };
 
 export default nextConfig;
