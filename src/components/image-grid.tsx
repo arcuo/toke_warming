@@ -99,14 +99,12 @@ function ImageDialog({
 			<DialogContent className="flex w-[min(fit-content,95vw)] flex-col gap-0 p-0 sm:max-h-[min(1200px,80vh)] [&>button:last-child]:top-3.5">
 				<DialogHeader className="contents space-y-0 text-left">
 					<DialogTitle className="border-b px-6 py-4 text-base">
-						<h3>Image title</h3>
+						{file.customMetadata?.name || "Unnamed piece"}
+						{file.customMetadata?.medium && (
+							<> - {file.customMetadata.medium}</>
+						)}
 						<DialogDescription className="mt-2">
-							<p>
-								Image description ... Lorem ipsum dolor, sit amet consectetur
-								adipisicing elit. Eius, obcaecati laborum. Explicabo culpa non
-								optio! Unde, laboriosam est nisi inventore maiores facere in.
-								Laborum vel corporis excepturi quia veniam ad!
-							</p>
+							{file.customMetadata?.description || "No description provided"}
 						</DialogDescription>
 					</DialogTitle>
 					<div className="overflow-y-auto">
