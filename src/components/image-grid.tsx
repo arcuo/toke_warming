@@ -16,6 +16,7 @@ import {
 } from "./ui/dialog";
 import { ButtonLink } from "./ui/button";
 import type { ImageKitFile } from "@/app/api/pieces";
+import classnames from "classnames";
 
 export function ImagesGrid({ images }: { images: ImageKitFile[] }) {
 	return (
@@ -37,8 +38,7 @@ export function ImagesGrid({ images }: { images: ImageKitFile[] }) {
 							>
 								<AnimatedLoadingImage
 									imageProps={{
-										className: "rounded-lg",
-										priority: i < 4,
+										loading: i < 4 ? "eager" : "lazy",
 									}}
 									file={file}
 								/>
@@ -69,19 +69,21 @@ function AnimatedLoadingImage({
 			className={cn("mb-4", imageProps.className)}
 		>
 			<ImageDialog file={file}>
-				<Image
-					urlEndpoint="https://ik.imagekit.io/tokewarming/"
-					src={`/${file.filePath}`}
-					onLoad={(e) => {
-						setIsLoaded(true);
-						imageProps.onLoad?.(e);
-					}}
-					alt={file.name}
-					className="h-auto rounded-lg object-contain"
-					width={file.width / 2}
-					height={file.height / 2}
-					{...imageProps}
-				/>
+				<div className="overflow-hidden rounded-lg">
+					<Image
+						urlEndpoint="https://ik.imagekit.io/tokewarming/"
+						src={`/${file.filePath}`}
+						onLoad={(e) => {
+							setIsLoaded(true);
+							imageProps.onLoad?.(e);
+						}}
+						alt={file.name}
+						width={file.width / 2}
+						height={file.height / 2}
+						{...imageProps}
+						className={classnames("size-full origin-center scale-180 object-cover transition-transform hover:scale-120", imageProps.className)}
+					/>
+				</div>
 			</ImageDialog>
 		</motion.div>
 	);

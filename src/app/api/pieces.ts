@@ -9,6 +9,7 @@ export async function getPieces() {
 				Authorization: `Basic ${Buffer.from(`${process.env.IMAGEKIT_API_KEY}:`).toString("base64")}`,
 				"Content-Type": "application/json",
 			},
+			cache: "no-store",
 		},
 	).then((res) => res.json())) as ImageKitFile[];
 
