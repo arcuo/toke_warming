@@ -22,7 +22,7 @@ export function ImagesGrid({ images }: { images: ImageKitFile[] }) {
 	return (
 		<div className="w-full">
 			<div className="h-[1200px] items-end justify-center pb-12">
-				<div className="columns-2 gap-4 px-8 pb-8 sm:columns-3">
+				<div className="columns-2 gap-8 px-8 pb-8 sm:columns-3">
 					{images.map((file, i) => {
 						return (
 							<InView
@@ -66,10 +66,10 @@ function AnimatedLoadingImage({
 				visible: { opacity: 1, scale: 1, filter: "blur(0px)" },
 			}}
 			animate={isLoaded ? "visible" : "hidden"}
-			className={cn("mb-4", imageProps.className)}
+			className={cn("mb-8", imageProps.className)}
 		>
 			<ImageDialog file={file}>
-				<div className="overflow-hidden rounded-lg">
+				<div className="overflow-hidden rounded-[40px] shadow-lg shadow-neutral-100 [corner-shape:squircle]">
 					<Image
 						urlEndpoint="https://ik.imagekit.io/tokewarming/"
 						src={`/${file.filePath}`}
@@ -81,7 +81,10 @@ function AnimatedLoadingImage({
 						width={file.width / 2}
 						height={file.height / 2}
 						{...imageProps}
-						className={classnames("size-full origin-center scale-180 object-cover transition-transform hover:scale-120", imageProps.className)}
+						className={classnames(
+							"size-full origin-center scale-180 object-cover transition-transform duration-200 ease-in-out hover:scale-140",
+							imageProps.className,
+						)}
 					/>
 				</div>
 			</ImageDialog>

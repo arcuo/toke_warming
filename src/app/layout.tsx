@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className="grid h-screen w-screen grid-cols-1 grid-rows-[max-content_auto] overflow-hidden antialiased">
+			<body className="grid h-screen w-screen grid-cols-1 grid-rows-[max-content_auto] overflow-auto antialiased">
 				<Header />
 				<Main
 					className="flex-2 px-10 pt-10 pb-25 max-sm:mb-20"

@@ -29,7 +29,7 @@ export function Main({ children, className, ...props }: MainProps) {
 				scrollbarColor: "var(--foreground) var(--background)",
 			}}
 			className={cn(
-				"grid grid-rows-[max-content_auto] gap-10 overflow-y-auto lg:px-40",
+				"grid grid-rows-[max-content_auto] gap-10 lg:px-40",
 				className,
 			)}
 			{...props}
@@ -41,7 +41,7 @@ export function Main({ children, className, ...props }: MainProps) {
 					enter: { scale: 1, opacity: 1 },
 				}}
 			>
-				<h1 className="font-bold text-4xl">{title}</h1>
+				<h1 className="font-bold text-7xl">{title}</h1>
 			</motion.div>
 			<motion.div variants={variants}>{children}</motion.div>
 		</motion.main>

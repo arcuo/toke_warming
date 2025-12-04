@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const navPages: { path: string; title: string; h1: string }[] = [
-	{ path: "/", title: "Home", h1: "Toke Warming - Self-taught artist" },
-	{ path: "/art", title: "Art", h1: "My artworks" },
+	{ path: "/", title: "Home", h1: "Hello!" },
+	{ path: "/art", title: "Artworks", h1: "My artworks" },
 	{ path: "/contact", title: "Commission", h1: "I do commission work" },
 ];
 
@@ -18,7 +18,7 @@ export const Header = () => {
 	return (
 		<motion.header
 			className={cn(
-				"relative flex items-center gap-15 overflow-hidden px-10 py-5 shadow-2xl shadow-amber-800/10",
+				"items-top fixed top-0 right-0 left-0 flex justify-between gap-15 overflow-hidden px-10 py-5",
 			)}
 			id="main-header"
 			initial="hidden"
@@ -68,7 +68,7 @@ export const Header = () => {
 				exit="hidden"
 				transition={{ staggerChildren: 0.15 }}
 			>
-				<ul className="flex place-self-start sm:gap-10">
+				<ul className="flex flex-col items-end sm:gap-5">
 					{navPages.slice(1).map((it, i) => (
 						<motion.li
 							key={i}

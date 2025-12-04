@@ -47,14 +47,15 @@ export function AboutPage() {
 				src="IMG_7149.webp"
 				transformation={[
 					{
-						width: 1200,
+						width: 800,
 						height: 400,
 					},
 				]}
-				width={1200}
+				width={800}
 				height={400}
+				priority
 				alt="Toke Warming"
-				className="rounded-md"
+				className="rounded-[90px] [corner-shape:squircle]"
 			/>
 
 			<motion.p
@@ -67,7 +68,7 @@ export function AboutPage() {
 				I am Toke Warming
 			</motion.p>
 
-			<motion.p variants={{ hidden: fromBottom, visible }}>
+			<motion.p variants={{ hidden: fromBottom, visible }} className="w-120 text-center">
 				I am a self-taught artist from Aarhus, Denmark. I create art that is
 				unique, original and thought-provoking. I work in many mediums,
 				including linocut, painting and sculpture.
