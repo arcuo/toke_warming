@@ -17,8 +17,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
-			<body className="grid h-screen w-screen grid-cols-1 grid-rows-[max-content_auto] overflow-auto antialiased">
+		<html lang="en" className="overflow-hidden">
+			<body className="grid h-screen w-screen grid-cols-1 grid-rows-[max-content_auto] overflow-y-auto antialiased">
 				<Header />
 				<Main
 					className="flex-2 px-10 pt-10 pb-25 max-sm:mb-20"
